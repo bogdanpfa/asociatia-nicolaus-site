@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block titlu %}Proiectul{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:44px 30px;">
+  <span class="eyebrow">Din 2013</span>
+  <h1 style="max-width:22ch;">De la o dorință de familie, la un cămin pentru 50 de oameni</h1>
+  <p class="lede">Asociația Nicolaus s-a născut din dorința familiei Păvăluc și a Parohiei „Sf. Nicolae" Satu Nou de a crea un loc unde grija pentru semeni și valorile spirituale se împletesc. Așezământul „Acoperământul Maicii Domnului" va găzdui 50 de persoane vârstnice și alte persoane aflate în dificultate, în camere duble cu grup sanitar propriu, cu cabinete medicale, zone de recreere și o biserică proprie.</p>
+</div>
+
+<div class="sectiune">
+  <div class="container">
+    <h2>Stadiul lucrării, pe tronsoane</h2>
+    <div class="grid cols-4">
+      {% for cheie in ['tronson1', 'tronson2', 'tronson3', 'biserica'] %}
+      {% set bloc = continut[cheie] %}
+      <div class="card"><div class="foto-card"><img src="{{ url_for('static', filename=bloc['foto_path']) }}" alt="{{ bloc['titlu'] }}" loading="lazy"></div><h3>{{ bloc['titlu'] }}</h3><p>{{ bloc['text'] }}</p></div>
+      {% endfor %}
+    </div>
+
+    <h3 style="margin-top:36px;font-size:1.05rem;">Mai multe poze — Tronson III și biserică</h3>
+    <p class="cap">Cele mai recente fotografii de pe șantier, din 2025.</p>
+    <div class="grid cols-4" style="margin-top:14px;">
+      <figure class="galerie-item">
+        <div class="foto-card" style="aspect-ratio:4/3;"><img src="{{ url_for('static', filename='img/aerian-tronson3-spate.jpg') }}" alt="Tronsonul III, vedere aeriană din spate" loading="lazy"></div>
+        <figcaption class="cap">Tronsonul III, vedere aeriană din spate</figcaption>
+      </figure>
+      <figure class="galerie-item">
+        <div class="foto-card" style="aspect-ratio:4/3;"><img src="{{ url_for('static', filename='img/aerian-ansamblu-teren.jpg') }}" alt="Tronsonul III, biserica și terenul din jur, vedere aeriană" loading="lazy"></div>
+        <figcaption class="cap">Tronsonul III, biserica și terenul din jur</figcaption>
+      </figure>
+      <figure class="galerie-item">
+        <div class="foto-card" style="aspect-ratio:4/3;"><img src="{{ url_for('static', filename='img/cruce-turn-2025.jpg') }}" alt="Turla și crucea bisericii, 2025" loading="lazy"></div>
+        <figcaption class="cap">Turla și crucea bisericii</figcaption>
+      </figure>
+      <figure class="galerie-item">
+        <div class="foto-card" style="aspect-ratio:4/3;"><img src="{{ url_for('static', filename='img/tronsoane-curte-2025.jpg') }}" alt="Curtea interioară, cu cele trei tronsoane" loading="lazy"></div>
+        <figcaption class="cap">Curtea interioară, cu cele trei tronsoane</figcaption>
+      </figure>
+    </div>
+    <p style="margin-top:18px;"><a class="btn ghost" href="{{ url_for('galerie') }}">Vezi galeria completă</a></p>
+  </div>
+</div>
+
+<div class="sectiune" style="background:var(--surface-2);">
+  <div class="container">
+    <h2>Ce mai lipsește până la deschidere</h2>
+    <p class="cap">Structura e ridicată — rămân etapele care fac diferența dintre o clădire și un cămin.</p>
+    <div class="grid cols-4">
+      <div class="card"><h3>Instalații termice</h3></div>
+      <div class="card"><h3>Finisaje interioare</h3><p>Gresie, faianță, parchet.</p></div>
+      <div class="card"><h3>Mobilier</h3><p>Pentru 50 de persoane.</p></div>
+      <div class="card"><h3>Bucătărie &amp; spălătorie</h3><p>Echipamente profesionale.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="sectiune">
+  <div class="container">
+    <h2>Ce mai este nevoie: 1.206.000 €</h2>
+    <p class="cap">Deviz pe categorii principale de lucrări — detaliat în materialele pentru parteneri.</p>
+    <a class="btn ghost" href="{{ url_for('cum_ajuti') }}">Vezi cum poți contribui</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block titlu %}Confidențialitate{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:44px 20px;">
+  <h1 style="font-size:1.8rem;">Politica de confidențialitate</h1>
+  <p class="lede">Cum tratăm datele tale personale, în conformitate cu Regulamentul (UE) 2016/679 (GDPR).</p>
+</div>
+<div class="container" style="padding-bottom:60px;max-width:70ch;">
+  <h2 style="font-size:1.15rem;">Cine suntem</h2>
+  <p>{{ identitate.denumire }}, cu sediul în {{ identitate.adresa }}, CIF {{ identitate.cif }}, este operatorul de date pentru acest site. Ne poți contacta la {{ identitate.email_contact }} sau la {{ identitate.telefon }} pentru orice întrebare legată de datele tale.</p>
+
+  <h2 style="font-size:1.15rem;">Ce date colectăm</h2>
+  <p>Prin formularul de contact colectăm numele, adresa de email și conținutul mesajului pe care alegi să ni-l trimiți. Nu colectăm alte date personale prin acest site și nu folosim cookie-uri de urmărire (vezi <a href="{{ url_for('cookies') }}">politica de cookie-uri</a>).</p>
+
+  <h2 style="font-size:1.15rem;">De ce folosim aceste date</h2>
+  <p>Folosim datele din formular exclusiv pentru a-ți răspunde la mesaj, în baza consimțământului pe care ți-l ceri să-l bifezi înainte de trimitere (art. 6 alin. 1 lit. a GDPR). Nu folosim datele în scop de marketing și nu le transmitem către terți.</p>
+
+  <h2 style="font-size:1.15rem;">Cât timp le păstrăm</h2>
+  <p>Păstrăm mesajele primite prin formular pentru maximum 24 de luni de la trimitere, timp suficient pentru a răspunde și a păstra un istoric al corespondenței, după care le ștergem.</p>
+
+  <h2 style="font-size:1.15rem;">Drepturile tale</h2>
+  <p>Conform GDPR, ai dreptul de acces, rectificare, ștergere, restricționare a prelucrării, opoziție și portabilitate a datelor tale. Le poți exercita oricând, scriindu-ne la {{ identitate.email_contact }}. Ai, de asemenea, dreptul de a depune o plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (ANSPDCP), <a href="https://www.dataprotection.ro" target="_blank" rel="noopener noreferrer">www.dataprotection.ro</a>.</p>
+
+  <h2 style="font-size:1.15rem;">Securitate</h2>
+  <p>Luăm măsuri rezonabile, tehnice și organizatorice, pentru a proteja datele pe care ni le încredințezi împotriva accesului neautorizat, pierderii sau divulgării.</p>
+
+  <p class="cap" style="margin-top:20px;">Ultima actualizare: septembrie {{ an_curent }}.</p>
+</div>
+{% endblock %}

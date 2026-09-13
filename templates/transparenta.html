@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block titlu %}Transparență{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:44px 20px;">
+  <h1 style="font-size:2rem;">Cine suntem, pe hârtie</h1>
+  <p class="lede">Datele de identificare, actele oficiale și conducerea asociației.</p>
+</div>
+<div class="container" style="padding-bottom:20px;">
+  <div class="grid cols-2">
+    <div class="card">
+      <h3>Consiliul Director</h3>
+      <p>Președinte — Mihai Păvăluc<br>Vicepreședinte — Pr. Andrei Florariu<br>Secretar — Bogdan-Daniel Păvăluc</p>
+    </div>
+    <div class="card">
+      <h3>Date de identificare</h3>
+      <p>{{ identitate.denumire }} · {{ identitate.adresa }}<br>
+      CIF {{ identitate.cif }}<br>
+      Nr. Registrul Asociațiilor și Fundațiilor: {{ identitate.nr_registru }} ({{ identitate.instanta }}, {{ identitate.data_inregistrare }})</p>
+    </div>
+  </div>
+</div>
+<div class="sectiune">
+  <div class="container">
+    <h2>Acte oficiale</h2>
+    <div class="grid cols-3">
+      <div class="card"><h3>Act constitutiv</h3><p>de încărcat (PDF)</p></div>
+      <div class="card"><h3>Statutul asociației</h3><p>de încărcat (PDF)</p></div>
+      <div class="card"><h3>Dovada înscrierii ANAF</h3><p>de încărcat (PDF)</p></div>
+    </div>
+  </div>
+</div>
+<div class="sectiune" style="background:var(--surface-2);">
+  <div class="container">
+    <h2>Rapoarte de activitate</h2>
+    <p class="cap">Raportul anual de activitate este în lucru — cerut frecvent de departamentele CSR.</p>
+  </div>
+</div>
+{% endblock %}

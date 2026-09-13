@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block titlu %}Conținut Proiectul & Acasă{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:40px 20px;">
+  <h1 style="font-size:1.7rem;">Conținut — Proiectul & Acasă</h1>
+  <p class="lede">Modifică textul și poza fiecărui bloc de mai jos. <a href="{{ url_for('admin_santier') }}">&larr; Înapoi la administrare</a></p>
+</div>
+
+<div class="container" style="padding-bottom:60px;display:flex;flex-direction:column;gap:32px;max-width:640px;">
+
+  {% for cheie, eticheta, are_text in [
+    ('tronson1', 'Cardul „Tronson I” (Proiectul)', true),
+    ('tronson2', 'Cardul „Tronson II” (Proiectul)', true),
+    ('tronson3', 'Cardul „Tronson III” (Proiectul)', true),
+    ('biserica', 'Cardul „Biserică” (Proiectul)', true),
+    ('acasa_hero', 'Poza principală de pe Acasă', false)
+  ] %}
+  {% set bloc = continut[cheie] %}
+  <div class="card">
+    <h3 style="margin-top:0;">{{ eticheta }}</h3>
+    {% if bloc['foto_path'] %}
+    <div class="foto-card" style="aspect-ratio:16/10;margin-bottom:14px;"><img src="{{ url_for('static', filename=bloc['foto_path']) }}" alt="{{ bloc['titlu'] or eticheta }}" loading="lazy"></div>
+    {% endif %}
+    <form class="form" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="cheie" value="{{ cheie }}">
+      {% if are_text %}
+      <div class="camp">
+        <label for="titlu-{{ cheie }}">Titlu (afișat pe card)</label>
+        <input type="text" id="titlu-{{ cheie }}" name="titlu" value="{{ bloc['titlu'] or '' }}" required>
+      </div>
+      <div class="camp">
+        <label for="text-{{ cheie }}">Text scurt</label>
+        <textarea id="text-{{ cheie }}" name="text" rows="2" required>{{ bloc['text'] or '' }}</textarea>
+      </div>
+      {% endif %}
+      <div class="camp">
+        <label for="foto-{{ cheie }}">Înlocuiește poza (opțional)</label>
+        <input type="file" id="foto-{{ cheie }}" name="foto" accept="image/*">
+        <p class="cap" style="margin:0;">Lasă necompletat ca să păstrezi poza actuală. Nu încărca poze cu persoane identificabile.</p>
+      </div>
+      <button class="btn" type="submit" style="align-self:flex-start;">Salvează</button>
+    </form>
+  </div>
+  {% endfor %}
+
+</div>
+{% endblock %}

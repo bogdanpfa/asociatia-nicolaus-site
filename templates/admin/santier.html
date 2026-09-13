@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block titlu %}Administrare jurnal de șantier{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:40px 20px;">
+  <h1 style="font-size:1.7rem;">Jurnal de șantier — administrare</h1>
+  <p class="lede">Adaugă o intrare nouă sau șterge una existentă. <a href="{{ url_for('admin_continut') }}">Conținut Proiectul &amp; Acasă</a> · <a href="{{ url_for('admin_schimba_parola') }}">Schimbă parola</a> · <a href="{{ url_for('admin_logout') }}">Ieși din cont</a></p>
+</div>
+
+<div class="container" style="padding-bottom:30px;max-width:640px;">
+  <form class="form" method="post" enctype="multipart/form-data">
+    <div class="camp">
+      <label for="titlu">Titlu</label>
+      <input type="text" id="titlu" name="titlu" required>
+    </div>
+    <div class="camp">
+      <label for="data_eveniment">Dată (text liber, ex: „Iulie 2026”)</label>
+      <input type="text" id="data_eveniment" name="data_eveniment" required>
+    </div>
+    <div class="camp">
+      <label for="categorie">Categorie</label>
+      <select id="categorie" name="categorie">
+        <option value="Constructie">Construcție</option>
+        <option value="Biserica">Biserică</option>
+        <option value="Evenimente">Evenimente</option>
+      </select>
+    </div>
+    <div class="camp">
+      <label for="text">Text scurt</label>
+      <textarea id="text" name="text" rows="3" required></textarea>
+    </div>
+    <div class="camp">
+      <label for="foto">Poză (opțional)</label>
+      <input type="file" id="foto" name="foto" accept="image/*">
+      <p class="cap" style="margin:0;">JPG sau PNG. Se redimensionează automat și se elimină datele EXIF/GPS. Nu încărca poze cu persoane identificabile.</p>
+    </div>
+    <button class="btn" type="submit" style="align-self:flex-start;">Adaugă intrare</button>
+  </form>
+</div>
+
+<div class="container" style="padding-bottom:60px;">
+  {% for intrare in intrari %}
+  <div class="intrare">
+    {% if intrare["foto_path"] %}
+    <div class="foto-card"><img src="{{ url_for('static', filename=intrare['foto_path']) }}" alt="{{ intrare['titlu'] }}" loading="lazy"></div>
+    {% endif %}
+    <div>
+      <div class="data">{{ intrare["data_eveniment"] }} · {{ intrare["categorie"] }}</div>
+      <h3 style="margin-top:4px;">{{ intrare["titlu"] }}</h3>
+      <p>{{ intrare["text"] }}</p>
+      <form method="post" action="{{ url_for('admin_santier_sterge', intrare_id=intrare['id']) }}" onsubmit="return confirm('Ștergi intrarea aceasta?');">
+        <button class="btn ghost" type="submit">Șterge</button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block titlu %}Galerie{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:44px 20px;">
+  <h1 style="font-size:2rem;">Galerie foto &amp; video</h1>
+  <p class="lede">Selecție din arhiva șantierului, fără persoane identificabile. Click pe orice poză pentru a o vedea mărită.</p>
+</div>
+<div class="container" style="padding-bottom:60px;">
+  <div class="filtre" id="filtre-galerie">
+    <a href="#" data-filtru="toate" class="activ">Toate</a>
+    <a href="#" data-filtru="Constructie">Construcție</a>
+    <a href="#" data-filtru="Biserica">Biserică</a>
+    <a href="#" data-filtru="Evenimente">Evenimente</a>
+    <a href="#" data-filtru="Aeriene">Aeriene</a>
+  </div>
+  <div class="grid cols-4">
+    {% set poze_galerie = [
+      ('img/hero-tronsoane.jpg', 'Vedere aeriană de ansamblu — Tronson I, II, III și, în fundal, satul Satu Nou', 'Aeriene'),
+      ('img/tronson1.jpg', 'Tronsonul I, ridicat și acoperit', 'Constructie'),
+      ('img/tronson2.jpg', 'Tronsonul II, ridicat și acoperit integral', 'Constructie'),
+      ('img/tronson3.jpg', 'Tronsonul III, ridicat și acoperit, alături de biserică', 'Constructie'),
+      ('img/tronsoane-curte-2025.jpg', 'Curtea interioară, cu cele trei tronsoane vizibile', 'Constructie'),
+      ('img/vedere-larga-2025.jpg', 'Vedere de ansamblu asupra șantierului, 2026', 'Constructie'),
+      ('img/aerian-tronson1-placa2.jpg', 'Vedere aeriană — tronsonul I acoperit, placa tronsonului II turnată', 'Aeriene'),
+      ('img/aerian-prim-plan-tronson2.jpg', 'Vedere aeriană, prim-plan — tronsonul II', 'Aeriene'),
+      ('img/aerian-unghi-larg.jpg', 'Vedere aeriană de ansamblu, cu localitatea în fundal', 'Aeriene'),
+      ('img/aerian-tronson3-spate.jpg', 'Vedere aeriană — tronsonul III, din spate, cu biserica alături', 'Aeriene'),
+      ('img/aerian-ansamblu-teren.jpg', 'Vedere aeriană — întregul așezământ și terenul din jur', 'Aeriene'),
+      ('img/biserica-exterior.jpg', 'Biserica, ridicată și acoperită', 'Biserica'),
+      ('img/cruce-turn-2025.jpg', 'Crucea de pe turla bisericii, 2026', 'Biserica'),
+      ('img/biserica-2021.jpg', 'Biserica în construcție, 2021', 'Biserica'),
+      ('img/biserica-constructie.jpg', 'Biserica în construcție, cu schele', 'Biserica'),
+      ('img/biserica-schele.jpg', 'Biserica, cu schele montate', 'Biserica'),
+      ('img/biserica-tronson3.jpg', 'Biserica și, parțial, tronsonul III', 'Biserica'),
+      ('img/biserica-acoperis.jpg', 'Structura acoperișului bisericii, în lucru', 'Biserica'),
+      ('img/sfintirea-crucii.jpg', 'Sfințirea crucii, iulie 2019', 'Evenimente'),
+      ('img/santier-inceput.jpg', 'Începutul șantierului, iulie 2019', 'Constructie'),
+      ('img/armatura-cruce.jpg', 'Armătura fundației, cu crucea de sfințire în fundal', 'Constructie'),
+      ('img/cofraje.jpg', 'Cofraje pentru turnarea fundației', 'Constructie'),
+      ('img/cofraje2.jpg', 'Cofraje pentru turnarea fundației', 'Constructie'),
+      ('img/grinzi.jpg', 'Fundația turnată, în așteptarea zidăriei', 'Constructie'),
+      ('img/pictura-biserica.jpg', 'Pictura interioară a bisericii, în lucru', 'Biserica'),
+      ('img/interior-2.jpg', 'Interior în lucru, la roșu', 'Constructie'),
+      ('img/interior-4.jpg', 'Interior în lucru, la roșu', 'Constructie'),
+      ('img/interior-la-rosu.jpg', 'Interior în lucru, la roșu', 'Constructie'),
+      ('img/biblie.jpg', 'Biblia, folosită în timpul slujbei de sfințire a bisericii', 'Evenimente'),
+      ('img/cruce-stralucitoare.jpg', 'Crucea de pe turla bisericii', 'Biserica'),
+      ('img/peisaj-belcesti.jpg', 'Drumul spre Satu Nou, Belcești', '')
+    ] %}
+    {% for foto, descriere, categorie in poze_galerie %}
+    <figure class="galerie-item" data-categorie="{{ categorie }}">
+      <div class="foto-card" style="aspect-ratio:4/3;">
+        <img src="{{ url_for('static', filename=foto) }}" alt="{{ descriere }}" loading="lazy">
+      </div>
+      <figcaption class="cap">{{ descriere }}</figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

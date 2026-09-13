@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block titlu %}Autentificare admin{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:60px;max-width:420px;">
+  <h1 style="font-size:1.6rem;">Zona de administrare</h1>
+  <form class="form" method="post">
+    <div class="camp">
+      <label for="username">Utilizator</label>
+      <input type="text" id="username" name="username" required autofocus>
+    </div>
+    <div class="camp">
+      <label for="parola">Parolă</label>
+      <input type="password" id="parola" name="parola" required>
+    </div>
+    <button class="btn" type="submit">Intră</button>
+  </form>
+</div>
+{% endblock %}

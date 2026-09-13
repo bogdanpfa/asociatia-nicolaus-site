@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block titlu %}Cookie-uri{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:44px 20px;">
+  <h1 style="font-size:1.8rem;">Politica de cookie-uri</h1>
+  <p class="lede">Ce cookie-uri și conținuturi externe folosim pe acest site.</p>
+</div>
+<div class="container" style="padding-bottom:60px;max-width:70ch;">
+  <h2 style="font-size:1.15rem;">Cookie-uri esențiale</h2>
+  <p>Folosim un singur cookie tehnic, necesar pentru a reține alegerea ta din bannerul de cookie-uri (necesare / accept tot), astfel încât să nu îți mai arătăm bannerul la fiecare vizită. Acesta nu poate fi dezactivat, fiindcă site-ul nu funcționează corect fără el, și nu este folosit pentru urmărire.</p>
+
+  <h2 style="font-size:1.15rem;">Cookie-uri de măsurare a traficului</h2>
+  <p>Nu folosim, deocamdată, cookie-uri de analiză sau statistică. Dacă vom adăuga vreodată un astfel de instrument, acesta va porni oprit implicit și va apărea aici și în bannerul de consimțământ, cu opțiunea de a-l accepta sau refuza separat.</p>
+
+  <h2 style="font-size:1.15rem;">Conținut încărcat de la Google Maps</h2>
+  <p>Pe pagina de <a href="{{ url_for('contact') }}">Contact</a> harta nu se încarcă automat. Doar dacă apeși pe butonul „Vezi harta", browserul tău încarcă un conținut de la Google Maps, care poate seta propriile cookie-uri, conform <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">politicii de confidențialitate Google</a>. Până la acel click, nu se transmite nimic către Google.</p>
+
+  <h2 style="font-size:1.15rem;">Cum îți schimbi alegerea</h2>
+  <p>Poți reveni asupra alegerii oricând, din butonul de cookie-uri afișat permanent pe site, sau ștergând cookie-urile din setările browserului tău.</p>
+
+  <p class="cap" style="margin-top:20px;">Ultima actualizare: septembrie {{ an_curent }}.</p>
+</div>
+{% endblock %}

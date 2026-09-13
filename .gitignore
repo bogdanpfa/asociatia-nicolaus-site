@@ -1,0 +1,11 @@
+# NU se publica NICIODATA -- contine mesajele reale trimise de vizitatori prin
+# formularul de contact si hash-ul parolei de admin. Repository-ul de pe GitHub
+# trebuie sa fie PUBLIC (limitare a contului gratuit), deci orice ajunge aici
+# devine vizibil pentru oricine.
+instance/
+
+__pycache__/
+*.pyc
+.DS_Store
+
+# docs/ (exportul static) SE COMITE -- e chiar ce serveste GitHub Pages.

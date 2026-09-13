@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block titlu %}Schimbă parola{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:40px 20px;max-width:420px;">
+  <h1 style="font-size:1.6rem;">Schimbă parola</h1>
+  <p class="lede"><a href="{{ url_for('admin_santier') }}">&larr; Înapoi la administrare</a></p>
+</div>
+<div class="container" style="padding-bottom:60px;max-width:420px;">
+  <form class="form" method="post">
+    <div class="camp">
+      <label for="parola_curenta">Parola curentă</label>
+      <input type="password" id="parola_curenta" name="parola_curenta" required autofocus>
+    </div>
+    <div class="camp">
+      <label for="parola_noua">Parola nouă</label>
+      <input type="password" id="parola_noua" name="parola_noua" minlength="8" required>
+      <p class="cap" style="margin:0;">Minimum 8 caractere.</p>
+    </div>
+    <div class="camp">
+      <label for="parola_noua_confirmare">Confirmă parola nouă</label>
+      <input type="password" id="parola_noua_confirmare" name="parola_noua_confirmare" minlength="8" required>
+    </div>
+    <button class="btn" type="submit" style="align-self:flex-start;">Schimbă parola</button>
+  </form>
+</div>
+{% endblock %}

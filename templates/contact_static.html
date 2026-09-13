@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block titlu %}Contact{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:44px 30px;">
+  <h1 style="font-size:2rem;">Scrie-ne</h1>
+  <div class="grid cols-2" style="align-items:start;margin-top:20px;">
+    {# Varianta STATICA a formularului -- folosita doar la exportul pe GitHub Pages.
+       Nu mai exista server Flask care sa primeasca POST-ul, asa ca trimitem
+       direct catre Formspree (vezi FORMSPREE_ID in scripts/export_static.py). #}
+    <form class="form" method="post" action="https://formspree.io/f/{{ formspree_id }}">
+      <div class="camp">
+        <label for="nume">Nume</label>
+        <input type="text" id="nume" name="name" required>
+      </div>
+      <div class="camp">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="_replyto" required>
+      </div>
+      <div class="camp">
+        <label for="mesaj">Mesaj</label>
+        <textarea id="mesaj" name="message" rows="5" required></textarea>
+      </div>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+      <input type="hidden" name="_subject" value="Mesaj nou de pe asociatianicolaus.ro">
+      <div class="camp camp-checkbox">
+        <label class="checkbox">
+          <input type="checkbox" name="gdpr" required>
+          <span>Sunt de acord ca datele completate mai sus să fie folosite pentru a-mi răspunde la acest mesaj, conform <a href="{{ url_for('confidentialitate') }}">politicii de confidențialitate</a>.</span>
+        </label>
+      </div>
+      <button class="btn" type="submit" style="align-self:flex-start;">Trimite</button>
+    </form>
+    <div>
+      <div class="foto-card harta-facade" id="harta-facade" style="aspect-ratio:4/3;">
+        <button type="button" class="btn ghost" id="btn-harta">Vezi harta (Google Maps)</button>
+        <p class="cap" style="margin-top:8px;font-size:.72rem;">La click, se încarcă un conținut de la Google — vezi <a href="{{ url_for('cookies') }}">politica de cookie-uri</a>.</p>
+      </div>
+      <p style="margin-top:16px;">
+        {{ identitate.adresa }}<br>
+        Tel: {{ identitate.telefon }}<br>
+        Email: {{ identitate.email_contact }}<br>
+        Facebook: <a href="{{ identitate.facebook }}" target="_blank" rel="noopener noreferrer">/asociatianicolaus</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

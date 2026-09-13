@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block titlu %}Cum ajuți{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:44px 20px;">
+  <h1 style="font-size:2rem;">Patru feluri de a fi parte din poveste</h1>
+  <p class="lede">Nu e nevoie de un gest mare — e nevoie de unul real.</p>
+</div>
+<div class="container" style="padding-bottom:16px;">
+  <div class="grid cols-4">
+    <div class="card">
+      <h3>Donație directă</h3>
+      <p>Un transfer bancar, oricând, către contul asociației.</p>
+      <div class="iban-box">
+        <span class="iban-eticheta">Beneficiar</span>
+        <strong class="iban-beneficiar">{{ identitate.denumire }}</strong>
+        <span class="iban-eticheta">IBAN</span>
+        <strong class="iban-cod">{{ identitate.iban }}</strong>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Parteneriat CSR</h3>
+      <p>Firmele pot deduce fiscal sprijinul acordat: până la minimul dintre 0,75% din cifra de afaceri și 20% din impozitul pe profit (Formular 177/107).</p>
+      <a class="btn ghost" href="{{ url_for('contact') }}">Solicită materialul pentru parteneri</a>
+    </div>
+    <div class="card">
+      <h3>Materiale &amp; voluntariat</h3>
+      <p>Echipamente de bucătărie, mobilier, materiale de construcție sau timpul tău.</p>
+      <a class="btn ghost" href="{{ url_for('contact') }}">Scrie-ne ce poți oferi</a>
+    </div>
+    <div class="card">
+      <h3>Redirecționează 3,5%</h3>
+      <p>Din impozitul pe venit, fără niciun cost pentru tine — Formularul 230, online, în doi pași.</p>
+      <div class="f230ro-lansare btn" style="align-self:flex-start;cursor:pointer;">Completează Formularul 230</div>
+    </div>
+  </div>
+</div>
+<div class="sectiune">
+  <div class="container">
+    <h2>Transparență</h2>
+    <p class="cap">Toate fondurile sunt folosite exclusiv pentru finalizarea așezământului. Detalii despre acte, buget și conducere, pe pagina de <a href="{{ url_for('transparenta') }}">Transparență</a>.</p>
+  </div>
+</div>
+{% endblock %}
+{% block script_extra %}
+<script src="https://formular230.ro/share/3f3097e15c9"></script>
+{% endblock %}

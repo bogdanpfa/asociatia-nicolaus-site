@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Asociația Nicolaus</title>
+<meta name="description" content="Construim un așezământ pentru 50 de persoane vârstnice în Satu Nou, Belcești, Iași — vă invităm să fiți parte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<header class="antet">
+  <div class="container">
+    <a class="brand" href="/">
+      Asociația Nicolaus
+    </a>
+    <button class="nav-toggle" aria-label="Deschide meniul" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="nav-principal">
+      <li><a href="/" >Acasă</a></li>
+      <li><a href="/proiectul" >Proiectul</a></li>
+      <li><a href="/jurnal-de-santier" >Jurnal de șantier</a></li>
+      <li><a href="/galerie" >Galerie</a></li>
+      <li><a href="/cum-ajuti" >Cum ajuți</a></li>
+      <li><a href="/transparenta" >Transparență</a></li>
+      <li><a href="/contact" aria-current="page">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  
+    
+  
+
+  
+<div class="container hero" style="padding-block:44px 30px;">
+  <h1 style="font-size:2rem;">Scrie-ne</h1>
+  <div class="grid cols-2" style="align-items:start;margin-top:20px;">
+    
+    <form class="form" method="post" action="https://formspree.io/f/PUNE_AICI_ID_FORMSPREE">
+      <div class="camp">
+        <label for="nume">Nume</label>
+        <input type="text" id="nume" name="name" required>
+      </div>
+      <div class="camp">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="_replyto" required>
+      </div>
+      <div class="camp">
+        <label for="mesaj">Mesaj</label>
+        <textarea id="mesaj" name="message" rows="5" required></textarea>
+      </div>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+      <input type="hidden" name="_subject" value="Mesaj nou de pe asociatianicolaus.ro">
+      <div class="camp camp-checkbox">
+        <label class="checkbox">
+          <input type="checkbox" name="gdpr" required>
+          <span>Sunt de acord ca datele completate mai sus să fie folosite pentru a-mi răspunde la acest mesaj, conform <a href="/confidentialitate">politicii de confidențialitate</a>.</span>
+        </label>
+      </div>
+      <button class="btn" type="submit" style="align-self:flex-start;">Trimite</button>
+    </form>
+    <div>
+      <div class="foto-card harta-facade" id="harta-facade" style="aspect-ratio:4/3;">
+        <button type="button" class="btn ghost" id="btn-harta">Vezi harta (Google Maps)</button>
+        <p class="cap" style="margin-top:8px;font-size:.72rem;">La click, se încarcă un conținut de la Google — vezi <a href="/cookies">politica de cookie-uri</a>.</p>
+      </div>
+      <p style="margin-top:16px;">
+        Sat Satu Nou, Com. Belcești, Jud. Iași<br>
+        Tel: 0723 339081<br>
+        Email: mihai.pavaluc@asociatianicolaus.ro<br>
+        Facebook: <a href="https://www.facebook.com/asociatianicolaus/" target="_blank" rel="noopener noreferrer">/asociatianicolaus</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="subsol">
+  <div class="container">
+    <div class="legal">
+      <strong>Asociația Nicolaus</strong> · Sat Satu Nou, Com. Belcești, Jud. Iași<br>
+      CIF 31450986<br>
+      Înscrisă în Registrul Asociațiilor și Fundațiilor sub nr. 1027/A/2013
+      (Judecătoria Hârlău, 13.04.2013)<br>
+      IBAN: RO65 BRDE 240S V300 9000 2400
+      <div class="versiune">© 2026 Asociația Nicolaus · v0.2.3</div>
+      <div class="creditare">Site creat cu ajutorul AI de <a href="https://www.pandapc.ro" target="_blank" rel="noopener noreferrer">Pandapc.ro</a> — proiect dezvoltat de Bogdan PĂVĂLUC</div>
+    </div>
+    <nav class="linkuri">
+      <a href="/confidentialitate">Confidențialitate</a>
+      <a href="/cookies">Cookie-uri</a>
+      <a href="/transparenta">Transparență</a>
+      <a href="https://www.facebook.com/asociatianicolaus/" target="_blank" rel="noopener noreferrer" class="link-facebook" aria-label="Asociația Nicolaus pe Facebook">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.5c0-.9.25-1.5 1.55-1.5H16.5V4.3c-.27-.04-1.2-.12-2.28-.12-2.25 0-3.79 1.37-3.79 3.9V10.5H8v3h2.43V21h3.07z"/></svg>
+        Facebook
+      </a>
+      
+      <a href="/admin/login">Admin</a>
+      
+    </nav>
+  </div>
+</footer>
+
+<div class="cookie-banner" hidden>
+  <p>Folosim cookie-uri esențiale pentru funcționare și, opțional, de măsurare a traficului. <a href="/cookies">Detalii</a>.</p>
+  <div class="actiuni">
+    <button class="btn ghost" data-cookie-alegere="necesare">Doar necesare</button>
+    <button class="btn" data-cookie-alegere="toate">Accept tot</button>
+  </div>
+</div>
+<button type="button" class="cookie-flotant" id="btn-cookie-reopen" aria-label="Preferințe cookie-uri" title="Preferințe cookie-uri">🍪</button>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button type="button" class="lightbox-inchide" id="btn-lightbox-inchide" aria-label="Închide poza">✕</button>
+  <figure>
+    <img id="lightbox-img" src="" alt="">
+    <figcaption id="lightbox-caption"></figcaption>
+  </figure>
+</div>
+
+<script src="/static/js/main.js"></script>
+
+</body>
+</html>

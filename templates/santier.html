@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block titlu %}Jurnal de șantier{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:44px 20px;">
+  <h1 style="font-size:2rem;">Jurnal de șantier</h1>
+  <p class="lede">Dovada că lucrul continuă — o intrare nouă de fiecare dată când se termină ceva pe șantier.</p>
+</div>
+<div class="container" style="padding-bottom:60px;">
+  <div class="filtre" id="filtre-santier">
+    <a href="#" data-filtru="toate" class="activ">Toate</a>
+    <a href="#" data-filtru="Constructie">Construcție</a>
+    <a href="#" data-filtru="Biserica">Biserică</a>
+    <a href="#" data-filtru="Evenimente">Evenimente</a>
+  </div>
+
+  {% for intrare in intrari %}
+  <div class="intrare" data-categorie="{{ intrare['categorie'] }}">
+    {% if intrare["foto_path"] %}
+    <div class="foto-card">
+      <img src="{{ url_for('static', filename=intrare['foto_path']) }}" alt="{{ intrare['titlu'] }}" loading="lazy">
+    </div>
+    {% else %}
+    <div class="foto-in-asteptare">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3"/></svg>
+    </div>
+    {% endif %}
+    <div>
+      <div class="data">{{ intrare["data_eveniment"] }} · {{ intrare["categorie"] }}</div>
+      <h3 style="margin-top:4px;">{{ intrare["titlu"] }}</h3>
+      <p>{{ intrare["text"] }}</p>
+    </div>
+  </div>
+  {% else %}
+  <p id="santier-gol">Nu sunt încă intrări.</p>
+  {% endfor %}
+</div>
+{% endblock %}
