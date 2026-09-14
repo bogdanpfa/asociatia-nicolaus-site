@@ -185,6 +185,29 @@ img{max-width:100%;display:block;}
 .alerta.succes{background:#E8F0E4;color:#3A5B32;border:1px solid #C4DAB9;}
 .alerta.eroare{background:#F6E4DE;color:#7A3620;border:1px solid #E5BEA9;}
 
+/* pagina parteneri */
+.partener-card{align-items:center;text-align:center;}
+.partener-logo{
+  width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
+  background:var(--surface-2);border-radius:var(--radius);overflow:hidden;
+}
+.partener-logo img{max-width:78%;max-height:78%;width:auto;height:auto;object-fit:contain;display:block;}
+.partener-fallback{
+  width:56px;height:56px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);
+  display:flex;align-items:center;justify-content:center;font-family:"Fraunces",serif;font-weight:600;font-size:1.4rem;
+}
+.partener-cif{font-size:.75rem;color:var(--ink-muted);font-family:monospace;}
+.partener-lista{display:flex;flex-direction:column;gap:10px;}
+.partener-rand{
+  display:flex;align-items:center;gap:16px;padding:14px 0;border-top:1px solid var(--line);
+}
+.partener-rand:first-child{border-top:none;}
+.partener-rand .partener-logo{width:64px;height:64px;aspect-ratio:auto;flex:none;}
+.partener-rand .info{flex:1;min-width:0;}
+.partener-rand .info h3{font-size:.98rem;margin:0 0 2px;}
+.partener-rand form{margin-left:auto;}
+@media (max-width:560px){.partener-rand{flex-wrap:wrap;}.partener-rand form{margin-left:0;}}
+
 /* footer */
 .subsol{background:var(--surface-2);border-top:1px solid var(--line);margin-top:60px;}
 .subsol .container{padding-block:34px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;}
