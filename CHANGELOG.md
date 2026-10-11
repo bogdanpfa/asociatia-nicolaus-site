@@ -2,6 +2,83 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/ro/), română.
 
+## [0.3.5] — 2026-10-11
+
+### Schimbat
+- Partenerul STIZO NPC SRL: descrierea devine „Sponsor și executant al structurii așezământului: pereți, stâlpi, grinzi, acoperiș și învelitoarea din tablă zincată." — firma a și sponsorizat, a și lucrat (precizare de la Bogdan; corectează formularea „contra cost" din 0.3.4). Adăugat website-ul `https://stizo-npc.ro`, deci numele partenerului e acum link. Modificat pe o copie a bazei (`PRAGMA integrity_check` = ok), apoi copiat înapoi.
+- `APP_VERSION` 0.3.4 → 0.3.5.
+
+### De făcut / în așteptare
+- `stizo-npc.ro` nu e încă online (se populează în curând) — până atunci linkul din pagina Parteneri duce la o adresă care nu răspunde. Verificăm după lansarea site-ului firmei.
+- Sumele sponsorizate nu sunt menționate nicăieri (nici în revistă, nici pe site); de decis dacă vrem să le publicăm și cu acordul firmei.
+- Decizie rămasă de la 0.3.4: dacă pagina „Parteneri" să aibă secțiuni separate (sponsori / executanți).
+
+## [0.3.4] — 2026-10-11
+
+### Adăugat
+- Primul partener pe pagina „Parteneri": **STIZO NPC SRL** (CIF RO26873840, Iași) — firma care a executat structura așezământului (pereți, stâlpi, grinzi, acoperiș și învelitoarea din tablă zincată), contra cost. Rând nou în tabelul `parteneri` (inserat pe o copie a bazei, `PRAGMA integrity_check` = ok, apoi copiat înapoi conform protocolului), cu sigla în `static/img/parteneri/stizo-npc-srl.png`.
+- Sigla a fost pregătită din imaginea primită: fundalul gri eliminat (fundal transparent), decupată pe conținut, 389×391 px — acceptabilă pentru cardul din pagină; nu s-a modificat conținutul grafic.
+
+### Schimbat
+- `APP_VERSION` 0.3.3 → 0.3.4.
+
+### De făcut / în așteptare
+- Site-ul firmei (stizo-npc.ro) nu e încă online — câmpul „website" a rămas gol, deci numele partenerului nu e link. Când site-ul apare: Admin → Parteneri → Editează → completează „website".
+- Pagina „Parteneri" folosește formularea „sprijinul lor" pentru toți partenerii; STIZO a lucrat contra cost. Formularea de pe pagină rămâne neschimbată, dar descrierea partenerului spune doar „a executat" (fără „sponsor"). De decis dacă vrem o secțiune separată pentru executanți.
+- Anul sfințirii crucii (2018/2019) — vezi 0.3.3.
+- Publicare: `2-publica-pe-site.bat` (regenerează `docs/`, include noua pagină Parteneri și sigla).
+
+## [0.3.3] — 2026-10-05
+
+### Adăugat
+- Pagina Proiectul, secțiune nouă **„Etapă cu etapă — ce s-a realizat, an cu an"**: cronologia din revista A4 (2013 înființarea → 2015–2018 proiect de execuție, avize, autorizații → 2019 sfințirea crucii, piatra de temelie, săpături la fundație → 2021–2024 zidărie, biserică, învelitoare din tablă zincată, tâmplărie, pictură → 2025–2026 pauză din lipsă de fonduri, cu stadiul actual). Plasată între „Stadiul lucrării, pe tronsoane" și „Ce mai lipsește până la deschidere". Stil nou `.cronologie` în `static/css/style.css` (an în auriu, rândul „2025–2026" în ton mai stins; pe telefon anul trece deasupra textului).
+- Pagina Proiectul, secțiune nouă **„Hrană din pământul de alături"**: terenul agricol de 7 ha (legume și cereale), cu aceeași formulare ca în revista A4 (pagina 12).
+
+### Schimbat
+- `APP_VERSION` 0.3.2 → 0.3.3.
+
+### De făcut / în așteptare
+- Anul sfințirii crucii: cronologia folosește deocamdată **2019** (ca în rândul „01.07.2019" din revistă). Când Bogdan hotărăște 2018 sau 2019, se aliniază simultan cronologia, intrarea din Jurnal, legendele din Galerie, „Din 2019…" de pe Acasă și revista.
+
+## [0.3.2] — 2026-10-05
+
+Aliniere a site-ului cu revista A4 „Nicolaus 2026" (ediția cu modificările din 27 sept. – 5 oct.). Sursa cifrelor: Bogdan — capacitatea reală este de 48 de paturi, nu 50.
+
+### Corectat
+- Capacitatea așezământului: „50 de persoane/locuri" → **48** peste tot unde apărea — pagina Acasă (text de prezentare + cifra „locuri la deschidere"), pagina Proiectul (titlul „…un cămin pentru 48 de oameni", paragraful de introducere și cardul „Mobilier — pentru 48 de persoane") și meta-descrierea comună din `base.html` (cea care apare în rezultatele Google și la previzualizarea link-ului pe Facebook/WhatsApp).
+- Textul cardului „Tronson I" (conținut editabil din admin): „uși și ferestre **montate**" → „uși și ferestre **realizate**" (formularea folosită și în revistă). Modificat direct în baza de date (`continut_editabil`, cheia `tronson1`), pe o copie, cu `PRAGMA integrity_check` = ok înainte de copiere înapoi.
+
+### Adăugat
+- Pagina Proiectul, secțiunea „Ce mai lipsește până la deschidere": cardul „Instalații termice" are acum și subtitlul „Încălzire și climatizare." (devizul din revistă prevede „instalații termice complete și climatizare").
+- Pagina Proiectul, introducere: „spații adaptate persoanelor cu mobilitate redusă", alături de cabinetele medicale și zonele de recreere (cabinete medicale și zone de recreere erau deja menționate).
+
+### Versiune
+- `APP_VERSION` 0.3.1 → 0.3.2 (afișată în footer după publicare).
+
+### De făcut / în așteptare
+- **Anul sfințirii crucii** (2018 sau 2019 — decizia îi aparține lui Bogdan; același an trebuie folosit și în revistă): intrarea „Sfințirea crucii" din Jurnalul de șantier („Iulie 2019"), legendele din Galerie („Sfințirea crucii, iulie 2019", „Începutul șantierului, iulie 2019") și fraza „Din 2019, familia Păvăluc…" de pe Acasă. Neatinse în această versiune, pentru a nu introduce o dată greșită.
+- Posibil de adăugat: cronologie pe ani pe pagina Proiectul (2013 înființare → 2015–2018 proiect de execuție, avize, autorizații → 2019 sfințirea crucii și piatra de temelie → … → 2025–2026 pauză din lipsă de fonduri), identică cu cea din revistă; plus mențiunea terenului agricol de 7 ha (legume și cereale).
+- Publicare: rulează `2-publica-pe-site.bat` (regenerează `docs/`, face commit, `git pull`, `git push`). Folderul `docs/` local era rămas la v0.3.0 (exportul din 0.3.1 s-a publicat direct pe GitHub), deci un `git pull` poate semnala conflict pe câteva fișiere din `docs/` — în caz de conflict nu se rezolvă manual; se trimite mesajul.
+
+## [0.3.1] — 2026-09-14
+
+### Corectat
+- Favicon lipsă la `/favicon.ico` (rădăcina site-ului) — link-ul `<link rel="icon">` din `<head>` era prezent și funcțional, dar multe browsere/unelte cer direct `/favicon.ico`, indiferent de tag-ul din HTML, și primeau 404. Generat un `.ico` multi-rezoluție (16/32/48/64/128/256px) din logo, servit acum atât din Flask (rută nouă `/favicon.ico`) cât și din exportul static pentru GitHub Pages. `static/img/favicon.png` redus de la 512×512/234KB la 192×192/44KB (era supradimensionat pentru un favicon).
+- „Enforce HTTPS” activat în setările GitHub Pages — certificatul HTTPS exista deja și funcționa la accesare directă cu `https://`, dar vizitatorii care scriau `http://asociatianicolaus.ro` nu erau redirecționați automat. Acum orice acces pe `http://` sare automat pe `https://`.
+
+## [0.3.0] — 2026-09-14
+
+### Adăugat
+- Logo-ul asociației (furnizat de Bogdan, format Canva) în antetul fiecărei pagini, lângă numele „Asociația Nicolaus", plus favicon în tab-ul browserului — pregătite din logo prin eliminarea fundalului alb (transparență) și decupare automată pe conținut.
+- Pagină publică nouă „Parteneri" (`/parteneri`) — afișează firmele/instituțiile partenere: logo (sau inițiala numelui, dacă nu are logo încărcat), nume (link către website, dacă există), descriere scurtă a sprijinului și CIF. Stare goală tratată explicit („Lista e goală, deocamdată" + îndemn de a deveni partener), nu pagină albă.
+- Secțiune nouă de administrare „Parteneri" (`/admin/parteneri`) — adaugă, editează și șterge parteneri, cu upload de logo (procesat separat de pozele din jurnal: păstrează transparența PNG, nu mai convertim la JPEG) și un comutator „afișat pe site" ca să poți ascunde temporar un partener fără să-l ștergi.
+- Tabelul `parteneri` în baza de date (nume, cif, website, descriere, logo_path, ordine, activ) — migrat pe baza reală, cu backup înainte de scriere, conform protocolului.
+- `scripts/init_db.py` completat cu tabelul `continut_editabil` (lipsea din schema scriptului, deși există deja în baza reală — o instalare nouă de la zero ar fi eșuat la /admin/continut) și cu tabelul `parteneri`, plus rândurile inițiale (seed) pentru cele 5 chei de conținut editabil.
+- Ruta `/parteneri` adăugată în `scripts/export_static.py`, pentru ca pagina să fie inclusă la exportul static pentru GitHub Pages.
+
+### Corectat
+- `FORMSPREE_ID` din `scripts/export_static.py` era încă placeholder-ul („PUNE_AICI_ID_FORMSPREE") în copia locală, deși fusese completat direct pe GitHub (id real: `mzeblapg`) după ce formularul de contact a picat cu „Form not found" la primul test. Sincronizat acum și local, ca exporturile viitoare să nu mai regreseze la ID-ul greșit.
+
 ## [0.2.3] — 2026-09-13
 
 ### Schimbat

@@ -4,17 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block titlu %}Asociația Nicolaus{% endblock %} — Asociația Nicolaus</title>
-<meta name="description" content="{% block descriere %}Construim un așezământ pentru 50 de persoane vârstnice în Satu Nou, Belcești, Iași — vă invităm să fiți parte.{% endblock %}">
+<meta name="description" content="{% block descriere %}Construim un așezământ pentru 48 de persoane vârstnice în Satu Nou, Belcești, Iași — vă invităm să fiți parte.{% endblock %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
 </head>
 <body>
 
 <header class="antet">
   <div class="container">
     <a class="brand" href="{{ url_for('acasa') }}">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="33" height="38">
       Asociația Nicolaus
     </a>
     <button class="nav-toggle" aria-label="Deschide meniul" aria-expanded="false">
@@ -26,6 +30,7 @@
       <li><a href="{{ url_for('santier') }}" {% if request.endpoint=='santier' %}aria-current="page"{% endif %}>Jurnal de șantier</a></li>
       <li><a href="{{ url_for('galerie') }}" {% if request.endpoint=='galerie' %}aria-current="page"{% endif %}>Galerie</a></li>
       <li><a href="{{ url_for('cum_ajuti') }}" {% if request.endpoint=='cum_ajuti' %}aria-current="page"{% endif %}>Cum ajuți</a></li>
+      <li><a href="{{ url_for('parteneri') }}" {% if request.endpoint=='parteneri' %}aria-current="page"{% endif %}>Parteneri</a></li>
       <li><a href="{{ url_for('transparenta') }}" {% if request.endpoint=='transparenta' %}aria-current="page"{% endif %}>Transparență</a></li>
       <li><a href="{{ url_for('contact') }}" {% if request.endpoint=='contact' %}aria-current="page"{% endif %}>Contact</a></li>
     </ul>

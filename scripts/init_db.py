@@ -32,7 +32,29 @@ CREATE TABLE IF NOT EXISTS admin_users (
     username TEXT UNIQUE NOT NULL,
     password_hash TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS continut_editabil (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cheie TEXT UNIQUE NOT NULL,
+    titlu TEXT,
+    text TEXT,
+    foto_path TEXT
+);
+
+CREATE TABLE IF NOT EXISTS parteneri (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nume TEXT NOT NULL,
+    cif TEXT NOT NULL,
+    website TEXT,
+    descriere TEXT,
+    logo_path TEXT,
+    ordine INTEGER NOT NULL DEFAULT 0,
+    activ INTEGER NOT NULL DEFAULT 1,
+    creat_la TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 """
+
+CHEI_CONTINUT_EDITABIL = ["tronson1", "tronson2", "tronson3", "biserica", "acasa_hero"]
 
 SEED = [
     ("Sfințirea crucii", "Iulie 2019", "Evenimente",
@@ -55,6 +77,10 @@ def main():
         print(f"Seedate {len(SEED)} intrări reale în jurnalul de șantier.")
     else:
         print(f"jurnal_intrari are deja {n} intrări — nu ating nimic.")
+    for cheie in CHEI_CONTINUT_EDITABIL:
+        con.execute(
+            "INSERT OR IGNORE INTO continut_editabil (cheie) VALUES (?)", (cheie,)
+        )
     con.commit()
     con.execute("PRAGMA integrity_check")
     con.close()

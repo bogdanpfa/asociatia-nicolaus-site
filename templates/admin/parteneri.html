@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block titlu %}Administrare parteneri{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:40px 20px;">
+  <h1 style="font-size:1.7rem;">Parteneri — administrare</h1>
+  <p class="lede">Adaugă un partener nou sau editează/șterge unul existent. <a href="{{ url_for('admin_santier') }}">Jurnal de șantier</a> · <a href="{{ url_for('admin_continut') }}">Conținut Proiectul &amp; Acasă</a> · <a href="{{ url_for('admin_schimba_parola') }}">Schimbă parola</a> · <a href="{{ url_for('admin_logout') }}">Ieși din cont</a></p>
+</div>
+
+<div class="container" style="padding-bottom:30px;max-width:640px;">
+  <form class="form" method="post" enctype="multipart/form-data">
+    <div class="camp">
+      <label for="nume">Nume firmă / instituție</label>
+      <input type="text" id="nume" name="nume" required>
+    </div>
+    <div class="camp">
+      <label for="cif">CIF</label>
+      <input type="text" id="cif" name="cif" required>
+    </div>
+    <div class="camp">
+      <label for="website">Website (opțional)</label>
+      <input type="url" id="website" name="website" placeholder="https://...">
+    </div>
+    <div class="camp">
+      <label for="descriere">Descriere scurtă a sprijinului (opțional)</label>
+      <textarea id="descriere" name="descriere" rows="2" placeholder="Ex: materiale de construcție, echipamente bucătărie..."></textarea>
+    </div>
+    <div class="camp">
+      <label for="logo">Logo (opțional)</label>
+      <input type="file" id="logo" name="logo" accept="image/*">
+      <p class="cap" style="margin:0;">PNG cu fundal transparent arată cel mai bine. Fără logo, apare inițiala numelui.</p>
+    </div>
+    <div class="camp">
+      <label for="ordine">Ordine afișare (opțional, cei cu număr mai mic apar primii)</label>
+      <input type="number" id="ordine" name="ordine" value="0">
+    </div>
+    <button class="btn" type="submit" style="align-self:flex-start;">Adaugă partener</button>
+  </form>
+</div>
+
+<div class="container" style="padding-bottom:60px;">
+  <div class="partener-lista">
+    {% for p in parteneri %}
+    <div class="partener-rand">
+      <div class="partener-logo">
+        {% if p['logo_path'] %}
+        <img src="{{ url_for('static', filename=p['logo_path']) }}" alt="">
+        {% else %}
+        <div class="partener-fallback">{{ p['nume'][0] | upper }}</div>
+        {% endif %}
+      </div>
+      <div class="info">
+        <h3>{{ p['nume'] }}{% if not p['activ'] %} <span class="cap">(ascuns de pe site)</span>{% endif %}</h3>
+        <span class="partener-cif">CIF {{ p['cif'] }}{% if p['website'] %} · {{ p['website'] }}{% endif %}</span>
+      </div>
+      <a class="btn ghost" href="{{ url_for('admin_parteneri_editeaza', partener_id=p['id']) }}">Editează</a>
+      <form method="post" action="{{ url_for('admin_parteneri_sterge', partener_id=p['id']) }}" onsubmit="return confirm('Ștergi partenerul {{ p['nume'] }}?');">
+        <button class="btn ghost" type="submit">Șterge</button>
+      </form>
+    </div>
+    {% else %}
+    <p class="cap">Niciun partener adăugat încă.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

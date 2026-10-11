@@ -8,7 +8,7 @@ import unicodedata
 from datetime import datetime
 from pathlib import Path
 
-from flask import Flask, g, redirect, render_template, request, session, url_for, flash, abort
+from flask import Flask, g, redirect, render_template, request, session, url_for, flash, abort, send_from_directory
 from werkzeug.security import check_password_hash, generate_password_hash
 from PIL import Image, ImageOps
 
@@ -66,6 +66,13 @@ def login_necesar(view):
 
 # ---------- pagini publice ----------
 
+@app.route("/favicon.ico")
+def favicon():
+    # servit din radacina site-ului (nu din /static/) -- multe browsere si unelte
+    # (bookmark-uri, integrari) cauta /favicon.ico direct, ignorand <link rel="icon">
+    return send_from_directory(app.static_folder, "favicon.ico", mimetype="image/vnd.microsoft.icon")
+
+
 @app.route("/")
 def acasa():
     ultimele = get_db().execute(
@@ -95,6 +102,14 @@ def galerie():
 @app.route("/cum-ajuti")
 def cum_ajuti():
     return render_template("cum_ajuti.html")
+
+
+@app.route("/parteneri")
+def parteneri():
+    lista = get_db().execute(
+        "SELECT * FROM parteneri WHERE activ = 1 ORDER BY ordine ASC, nume COLLATE NOCASE ASC"
+    ).fetchall()
+    return render_template("parteneri.html", parteneri=lista)
 
 
 @app.route("/transparenta")
@@ -204,6 +219,29 @@ def salveaza_foto_jurnal(fisier, titlu):
     return proceseaza_si_salveaza_foto(fisier, "jurnal")
 
 
+def proceseaza_si_salveaza_logo(fisier, prefix):
+    """La fel ca proceseaza_si_salveaza_foto, dar pentru logo-uri de firme:
+    pastreaza transparenta (multe logo-uri sunt PNG cu fundal transparent) si
+    salveaza mereu ca PNG, nu JPEG. Returneaza calea relativa sau None."""
+    if not fisier or not fisier.filename:
+        return None
+    imagine = Image.open(fisier)
+    imagine = ImageOps.exif_transpose(imagine)
+    are_transparenta = imagine.mode in ("RGBA", "LA") or (
+        imagine.mode == "P" and "transparency" in imagine.info
+    )
+    imagine = imagine.convert("RGBA") if are_transparenta else imagine.convert("RGB")
+    max_latime = 500
+    if imagine.width > max_latime:
+        h = int(imagine.height * (max_latime / imagine.width))
+        imagine = imagine.resize((max_latime, h), Image.LANCZOS)
+    nume = f"{prefix}-{int(time.time())}-{slugifica(prefix)}.png"
+    folder_logo = Path(app.static_folder) / "img" / "parteneri"
+    folder_logo.mkdir(parents=True, exist_ok=True)
+    imagine.save(folder_logo / nume, "PNG", optimize=True)
+    return f"img/parteneri/{nume}"
+
+
 def get_continut():
     """Blocurile de continut editabile din Proiectul si Acasa, indexate dupa cheie."""
     randuri = get_db().execute("SELECT * FROM continut_editabil").fetchall()
@@ -275,6 +313,82 @@ def admin_continut():
         flash("Conținut actualizat.", "succes")
         return redirect(url_for("admin_continut"))
     return render_template("admin/continut.html", continut=get_continut())
+
+
+@app.route("/admin/parteneri", methods=["GET", "POST"])
+@login_necesar
+def admin_parteneri():
+    if request.method == "POST":
+        nume = request.form.get("nume", "").strip()
+        cif = request.form.get("cif", "").strip()
+        website = request.form.get("website", "").strip()
+        descriere = request.form.get("descriere", "").strip()
+        ordine_bruta = request.form.get("ordine", "").strip()
+        ordine = int(ordine_bruta) if ordine_bruta.lstrip("-").isdigit() else 0
+        if nume and cif:
+            logo_path = None
+            try:
+                logo_path = proceseaza_si_salveaza_logo(request.files.get("logo"), slugifica(nume))
+            except Exception:
+                flash("Partenerul a fost salvat, dar logo-ul nu a putut fi procesat (verifică să fie o imagine validă).", "eroare")
+            get_db().execute(
+                "INSERT INTO parteneri (nume, cif, website, descriere, logo_path, ordine) VALUES (?,?,?,?,?,?)",
+                (nume, cif, website or None, descriere or None, logo_path, ordine),
+            )
+            get_db().commit()
+            flash("Partener adăugat.", "succes")
+        else:
+            flash("Completează cel puțin numele și CIF-ul.", "eroare")
+        return redirect(url_for("admin_parteneri"))
+    lista = get_db().execute("SELECT * FROM parteneri ORDER BY ordine ASC, id DESC").fetchall()
+    return render_template("admin/parteneri.html", parteneri=lista)
+
+
+@app.route("/admin/parteneri/<int:partener_id>/editeaza", methods=["GET", "POST"])
+@login_necesar
+def admin_parteneri_editeaza(partener_id):
+    partener = get_db().execute("SELECT * FROM parteneri WHERE id = ?", (partener_id,)).fetchone()
+    if not partener:
+        abort(404)
+    if request.method == "POST":
+        nume = request.form.get("nume", "").strip()
+        cif = request.form.get("cif", "").strip()
+        website = request.form.get("website", "").strip()
+        descriere = request.form.get("descriere", "").strip()
+        ordine_bruta = request.form.get("ordine", "").strip()
+        ordine = int(ordine_bruta) if ordine_bruta.lstrip("-").isdigit() else 0
+        activ = 1 if request.form.get("activ") == "on" else 0
+        if not nume or not cif:
+            flash("Completează cel puțin numele și CIF-ul.", "eroare")
+            return redirect(url_for("admin_parteneri_editeaza", partener_id=partener_id))
+        logo_path_nou = None
+        try:
+            logo_path_nou = proceseaza_si_salveaza_logo(request.files.get("logo"), slugifica(nume))
+        except Exception:
+            flash("Datele au fost salvate, dar logo-ul nou nu a putut fi procesat (verifică să fie o imagine validă).", "eroare")
+        if logo_path_nou:
+            get_db().execute(
+                "UPDATE parteneri SET nume=?, cif=?, website=?, descriere=?, ordine=?, activ=?, logo_path=? WHERE id=?",
+                (nume, cif, website or None, descriere or None, ordine, activ, logo_path_nou, partener_id),
+            )
+        else:
+            get_db().execute(
+                "UPDATE parteneri SET nume=?, cif=?, website=?, descriere=?, ordine=?, activ=? WHERE id=?",
+                (nume, cif, website or None, descriere or None, ordine, activ, partener_id),
+            )
+        get_db().commit()
+        flash("Partener actualizat.", "succes")
+        return redirect(url_for("admin_parteneri"))
+    return render_template("admin/parteneri_editeaza.html", partener=partener)
+
+
+@app.route("/admin/parteneri/<int:partener_id>/sterge", methods=["POST"])
+@login_necesar
+def admin_parteneri_sterge(partener_id):
+    get_db().execute("DELETE FROM parteneri WHERE id = ?", (partener_id,))
+    get_db().commit()
+    flash("Partener șters.", "succes")
+    return redirect(url_for("admin_parteneri"))
 
 
 @app.route("/admin/schimba-parola", methods=["GET", "POST"])

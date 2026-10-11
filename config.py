@@ -9,7 +9,7 @@ INSTANCE_DIR.mkdir(exist_ok=True)
 
 DB_PATH = INSTANCE_DIR / "nicolaus.db"
 
-APP_VERSION = "0.2.3"
+APP_VERSION = "0.3.5"
 
 _secret_file = INSTANCE_DIR / "secret_key.txt"
 if not _secret_file.exists():

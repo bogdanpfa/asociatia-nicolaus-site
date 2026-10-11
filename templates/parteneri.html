@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block titlu %}Parteneri{% endblock %}
+{% block descriere %}Firmele și instituțiile care construiesc alături de noi așezământul „Acoperământul Maicii Domnului”.{% endblock %}
+{% block continut %}
+<div class="container hero" style="padding-block:44px 20px;">
+  <h1 style="font-size:2rem;">Parteneri</h1>
+  <p class="lede">Firmele și instituțiile care au ales să fie parte din poveste. Mulțumim fiecăreia — sprijinul lor e vizibil și măsurabil în ceea ce construim.</p>
+</div>
+
+<div class="container" style="padding-bottom:60px;">
+  {% if parteneri %}
+  <div class="grid cols-3">
+    {% for p in parteneri %}
+    <div class="card partener-card">
+      <div class="partener-logo">
+        {% if p['logo_path'] %}
+        <img src="{{ url_for('static', filename=p['logo_path']) }}" alt="Sigla {{ p['nume'] }}" loading="lazy">
+        {% else %}
+        <div class="partener-fallback">{{ p['nume'][0] | upper }}</div>
+        {% endif %}
+      </div>
+      <h3>
+        {% if p['website'] %}
+        <a href="{{ p['website'] }}" target="_blank" rel="noopener noreferrer">{{ p['nume'] }}</a>
+        {% else %}
+        {{ p['nume'] }}
+        {% endif %}
+      </h3>
+      {% if p['descriere'] %}<p>{{ p['descriere'] }}</p>{% endif %}
+      <span class="partener-cif">CIF {{ p['cif'] }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="card" style="max-width:520px;">
+    <h3>Lista e goală, deocamdată</h3>
+    <p>Primii parteneri vor apărea aici curând. Dacă reprezinți o firmă și vrei să fii alături de noi, scrie-ne.</p>
+    <a class="btn" href="{{ url_for('contact') }}" style="align-self:flex-start;">Devino partener</a>
+  </div>
+  {% endif %}
+</div>
+
+<div class="sectiune">
+  <div class="container">
+    <h2>Vrei să fii alături de noi?</h2>
+    <p class="cap">Firmele pot deduce fiscal sprijinul acordat — detalii pe pagina <a href="{{ url_for('cum_ajuti') }}">Cum ajuți</a>. Scrie-ne și îți trimitem materialul de prezentare pentru parteneri.</p>
+    <a class="btn ghost" href="{{ url_for('contact') }}">Contactează-ne</a>
+  </div>
+</div>
+{% endblock %}
